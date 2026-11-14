@@ -147,10 +147,12 @@ Our team defined the problem, product concept, requirements, user experience dec
 
 ## 👥 Team
 
-Brian Addo
-Adanna Enyaosa 
-Jephthe Fabre
-Franklin Bolanos
+## 👥 Team
+
+- Brian Addo
+- Adanna Enyaosa
+- Jephthe Fabre
+- Franklin Bolanos
 
 ---
 
