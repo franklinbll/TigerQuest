@@ -1,0 +1,344 @@
+/* =========================================================
+   TigerQuest styles
+   Colors are defined once as variables, then reused below.
+   ========================================================= */
+:root{
+  --navy:#0e1722; --navy2:#172432; --ink:#202d3a; --muted:#758291;
+  --gold:#ffca37; --gold2:#ffb615; --paper:#fffef9; --line:#e4e7e4; --green:#2d9660;
+  --shadow:0 18px 50px rgba(12,26,35,.13);
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:"Trebuchet MS",Arial,sans-serif;color:var(--ink)}
+button,input,a{font:inherit}
+button{cursor:pointer}
+a{color:inherit}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #2f7fe0;outline-offset:3px}
+body{background:#e9efe9;background-image:radial-gradient(#bed2c4 1px,transparent 1px);background-size:22px 22px;overflow-x:hidden}
+code{background:#eef2ea;padding:1px 5px;border-radius:5px;font-size:.95em}
+
+.app{max-width:1880px;margin:auto;min-height:100vh;display:flex;flex-direction:column}
+
+/* ---------- Top bar ---------- */
+.topbar{min-height:83px;background:var(--navy);color:white;display:flex;align-items:center;padding:0 27px;gap:22px;box-shadow:0 4px 0 #ffc232;position:relative;z-index:5}
+.logo{display:flex;gap:12px;align-items:center;min-width:230px}
+.tiger-logo{height:50px;width:50px;border:2px solid var(--gold);border-radius:16px;background:linear-gradient(145deg,#39434e,#151c23);display:grid;place-items:center;font-size:30px;transform:rotate(-7deg);box-shadow:3px 4px 0 rgba(0,0,0,.35)}
+.logo-name{font-weight:900;font-size:27px;letter-spacing:-1.25px;line-height:1}
+.logo-name span{color:var(--gold)}
+.logo-sub{font:700 9px/1.8 Arial,sans-serif;letter-spacing:2.8px;color:#acb4c0}
+.nav{display:flex;gap:6px;align-items:center;margin-left:auto}
+.nav-btn{border:1px solid transparent;background:transparent;color:#c9d3dd;display:flex;align-items:center;gap:8px;padding:11px 14px;border-radius:12px;font-weight:900;font-size:13px;transition:.15s;white-space:nowrap}
+.nav-btn:hover{background:#263543;color:white}
+.nav-btn.active{background:#ffca37;color:#21200e;box-shadow:0 4px 0 #bd8710}
+.nav-btn .ico{font-size:18px}
+.player-pill{display:flex;align-items:center;gap:12px;margin-left:auto}
+.player-avatar{width:43px;height:43px;background:#fac84d;border:3px solid #fff;border-radius:50%;display:grid;place-items:center;font-size:24px}
+.player-info{min-width:142px}
+.lvl-line{display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:900;margin-bottom:7px;gap:8px}
+.lvl-line small{color:#d0d7db;font-size:10px}
+.xp-track{height:8px;border-radius:30px;overflow:hidden;background:#364655;border:1px solid #68727a}
+.xp-bar{height:100%;background:linear-gradient(90deg,#ff9f17,#ffe26b);width:0%;transition:width .5s}
+
+/* ---------- Three-column workspace ---------- */
+.workspace{display:grid;grid-template-columns:266px minmax(430px,1fr) 340px;gap:15px;padding:18px;flex:1;align-items:start}
+.side{display:flex;flex-direction:column;gap:15px;min-width:0}
+.panel{background:var(--paper);border:2px solid #dfebe2;border-radius:19px;box-shadow:0 6px 0 #cbd9cf;overflow:hidden}
+.panel-pad{padding:18px}
+.small-title{font-size:11px;letter-spacing:1.35px;font-weight:900;color:#6c7a80;text-transform:uppercase}
+.section-heading{font-size:13px;font-weight:900;letter-spacing:.2px;display:flex;align-items:center;justify-content:space-between;margin:0 0 12px;gap:8px}
+.section-heading span{font-weight:800;color:#7d878c;font-size:11px}
+
+/* Main quest card */
+.main-quest{background:#132334;border:2px solid #38414b;color:white;border-radius:19px;padding:20px;position:relative;overflow:hidden;box-shadow:0 6px 0 #0a1220}
+.main-quest:before{content:"★";font-size:125px;position:absolute;right:-11px;top:15px;color:#ffffff0a;transform:rotate(20deg)}
+.quest-eyebrow{display:inline-flex;gap:6px;background:#ffc936;color:#44320a;padding:7px 10px;font-size:10px;font-weight:900;border-radius:7px;letter-spacing:1px}
+.main-quest h2{font-size:24px;line-height:1.1;margin:16px 0 9px;letter-spacing:-.8px}
+.main-quest p{font-size:12px;color:#c4d3df;line-height:1.55;margin:0 0 16px}
+.progress-row{display:flex;align-items:center;gap:12px}
+.progress-track{height:9px;background:#485867;flex:1;border-radius:8px;overflow:hidden}
+.progress-fill{height:100%;width:0;background:linear-gradient(90deg,#f8b517,#ffe275);transition:width .5s}
+.progress-num{font-size:11px;font-weight:900;white-space:nowrap}
+.quest-xp{margin-top:10px;font-size:11px;font-weight:900;color:#ffd965}
+
+/* Search + categories */
+.search-field{height:43px;background:#f2f5f0;border:1px solid #dce5da;border-radius:11px;display:flex;align-items:center;gap:9px;padding:0 13px;color:#657c72}
+.search-field input{background:transparent;border:0;outline:0;width:100%;font-size:12px;color:#243341;min-width:0}
+.category-list{display:flex;flex-direction:column;gap:6px;margin-top:15px}
+.category-btn{background:transparent;border:2px solid transparent;padding:10px 9px;border-radius:11px;text-align:left;display:flex;align-items:center;gap:10px;font-size:13px;font-weight:900;color:#4a5866;transition:.14s}
+.category-btn:hover{background:#f4f5f1}
+.category-btn.active{background:#fff3d0;color:#473414;border-color:#ffe5a2}
+.category-icon{height:28px;width:30px;display:grid;place-items:center;font-size:18px}
+.category-count{margin-left:auto;font-size:10px;font-weight:900;background:#eaf0e9;border-radius:7px;min-width:25px;padding:4px 5px;text-align:center;color:#56695f}
+.category-btn.active .category-count{background:#ffe0a2;color:#654615}
+.tip-panel{background:#edf6f2;border:2px dashed #b6d7c9;border-radius:17px;padding:15px;display:flex;gap:11px;align-items:flex-start}
+.tip-panel .tip-icon{font-size:24px}
+.tip-panel strong{font-size:12px;display:block;margin-bottom:5px}
+.tip-panel p{font-size:11px;margin:0;line-height:1.48;color:#4b685e}
+
+/* ---------- Center: world frame + map ---------- */
+.center{min-width:0;display:flex;flex-direction:column;gap:14px}
+.world-frame{background:#fffef7;border:3px solid #dbe6da;border-radius:21px;box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column}
+.world-heading{min-height:74px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:11px 19px;background:#fffdf6;border-bottom:2px solid #e7e8d9}
+.world-title{font-weight:900;font-size:20px;line-height:1.1;margin:0;letter-spacing:-.4px}
+.world-sub{font-size:11px;color:#6d7a75;margin-top:6px;font-weight:700}
+.map-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.tag{font-weight:900;font-size:10px;border-radius:8px;background:#eaf7e9;color:#2a7046;display:inline-flex;align-items:center;gap:5px;padding:8px 10px}
+.tag.demo{background:#fff0cb;color:#8a5c0f}
+.control-btn{width:36px;height:36px;border:1px solid #e0e6e0;background:white;border-radius:10px;display:grid;place-items:center;color:#485b55;font-weight:bold;font-size:18px}
+.control-btn:hover{background:#fff0c2;color:#34280a}
+
+/* The stage keeps the same width:height ratio as the map picture (1511 x 1041),
+   so the picture is never stretched and nothing is letter-boxed. */
+.map-stage{position:relative;width:100%;aspect-ratio:1511/1041;background:#9fd16b;overflow:hidden;isolation:isolate}
+.map-svg{width:100%;height:100%;display:block;position:absolute;inset:0;touch-action:manipulation}
+
+/* Building hotspots: invisible until hovered, focused or selected */
+.hotspot{cursor:pointer;outline:none}
+.hotspot .hit{fill:rgba(255,255,255,0);stroke:transparent;stroke-width:5;stroke-linejoin:round;transition:fill .15s,stroke .15s}
+.hotspot:hover .hit{fill:rgba(255,255,255,.18);stroke:#fff7c2;stroke-dasharray:12 8}
+.hotspot:focus-visible .hit{fill:rgba(255,255,255,.22);stroke:#1f6fd1;stroke-width:7}
+.hotspot.selected .hit{fill:rgba(255,214,51,.22);stroke:#ffcf26;stroke-width:8;stroke-dasharray:none;filter:drop-shadow(0 0 10px rgba(255,214,51,.95))}
+.hotspot.faded .hit{fill:rgba(18,30,40,.42)}
+.hotspot.faded:hover .hit{fill:rgba(18,30,40,.3)}
+.event-badge{pointer-events:none}
+.event-badge rect{fill:#162536;stroke:#ffca37;stroke-width:3}
+.event-badge text{fill:#fff;font:900 20px "Trebuchet MS",Arial,sans-serif}
+
+.tutorial{position:absolute;top:14px;left:14px;pointer-events:none;padding:9px 12px;background:#142734de;border:1px solid #ffffff4d;color:#ffebae;border-radius:10px;font-size:11px;font-weight:900;z-index:2}
+.tutorial span{color:white}
+.map-hint{position:absolute;bottom:14px;left:14px;background:#182c2bea;color:white;display:flex;align-items:center;gap:6px;padding:9px 12px;border:1px solid #ffffff4a;border-radius:12px;font-weight:800;font-size:11px;pointer-events:none}
+.map-hint kbd{background:#f8f9eb;border-radius:4px;color:#24322a;padding:2px 5px;font-family:monospace}
+.map-legend{position:absolute;right:14px;top:14px;background:#fffff4eb;border:2px solid #e1efdc;border-radius:12px;padding:7px 10px;display:flex;align-items:center;gap:10px;font-weight:900;color:#40553e;font-size:10px;pointer-events:none}
+.details-fab{display:none}
+.world-footer{background:#142734;padding:11px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;color:#c5d6d5;font-size:11px;font-weight:800}
+.world-footer strong{color:#f9d051}
+.world-footer .footer-link{color:#e5e8f0;text-decoration:none}
+.world-footer .footer-link:hover{text-decoration:underline}
+
+/* ---------- Right panel: building details ---------- */
+.side-right{position:sticky;top:12px}
+.side-right .panel{max-height:calc(100vh - 24px);overflow-y:auto;position:relative}
+.sheet-close{display:none}
+.building-art{height:112px;background:linear-gradient(130deg,#182f3a,#294e4b);position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;border-bottom:4px solid #ffca37}
+.building-art:before,.building-art:after{content:"";position:absolute;width:230px;height:230px;border:30px solid #ffffff0a;transform:rotate(45deg);border-radius:18px}
+.building-art:after{width:120px;height:120px;border:20px solid #ffffff0d}
+.art-icon{font-size:62px;position:relative;filter:drop-shadow(3px 7px 0 #0004)}
+.art-label{position:absolute;top:12px;left:13px;background:#ffcf44;color:#3c3217;border-radius:7px;font-size:9px;font-weight:900;padding:6px 8px;letter-spacing:.5px}
+.detail-top{padding:17px 17px 13px;border-bottom:1px solid #e9ede8}
+.detail-top h2{margin:6px 0 8px;font-size:22px;letter-spacing:-.6px}
+.detail-top p{color:#5f6d69;font-size:12px;line-height:1.55;margin:0 0 12px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:10px;font-weight:900;padding:5px 9px;border-radius:20px;background:#edf4eb;color:#3f5c4b;border:1px solid #dce9da}
+.detail-section{padding:16px 17px;border-bottom:1px solid #ecede8}
+.services{display:flex;flex-wrap:wrap;gap:7px}
+.service{display:inline-flex;align-items:center;background:#f5f6f0;color:#4b5d54;border-radius:8px;padding:7px 8px;font-size:10px;font-weight:800}
+.service:before{content:"✓";margin-right:5px;color:#309e63}
+.resource{padding:14px 17px;display:flex;gap:6px;align-items:center;justify-content:space-between;color:#325f49;font-size:11px;font-weight:900}
+.resource a{color:#176e58;text-decoration:underline;text-underline-offset:3px}
+
+/* Mission cards (used in the right panel) */
+.mission-items{display:flex;flex-direction:column;gap:8px}
+.mission{border:1.5px solid #e8e9e0;background:#fffefa;border-radius:12px;padding:11px;transition:.18s}
+.mission:hover{border-color:#f7ca5f}
+.mission.verified{background:#f0f9f0;border-color:#cde6ce}
+.mission.highlight{border-color:#ffb615;box-shadow:0 0 0 3px #ffe38a}
+.mission-row{display:flex;gap:9px;align-items:flex-start}
+.mission-symbol{width:30px;height:30px;flex:none;display:grid;place-items:center;background:#fff0d4;border-radius:9px;font-size:17px}
+.mission.verified .mission-symbol{background:#d7f1de}
+.mission-copy{min-width:0;flex:1}
+.mission-name{font-size:12px;font-weight:900;line-height:1.25}
+.mission-desc{font-size:10.5px;line-height:1.45;color:#66766f;margin:4px 0 0}
+.xp-label{font-size:10px;font-weight:900;color:#9a6705;white-space:nowrap}
+.state-pill{display:inline-block;margin-top:6px;font-size:9.5px;font-weight:900;border-radius:20px;padding:3px 8px;background:#eef1ea;color:#4d5d55}
+.state-pill.planned{background:#e3eefc;color:#245189}
+.state-pill.self-reported{background:#fff1d1;color:#7a5408}
+.state-pill.verified{background:#d9f2df;color:#1d6b38}
+.skill-split{font-size:9.5px;color:#6a7a72;margin-top:4px}
+.mission-buttons{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.mission-action{flex:1 1 auto;background:#ffca37;border:0;border-bottom:3px solid #cf9516;border-radius:8px;color:#423015;font-size:10px;font-weight:900;padding:8px 7px;min-height:34px}
+.mission-action:hover{background:#ffdf7a}
+.mission-action.secondary{background:#eef3ec;border-bottom-color:#cad7c6;color:#3d5546}
+.mission-action.secondary:hover{background:#e2ecdf}
+.mission-action:disabled{background:#e1ebdc;border-color:#c4d4c2;color:#3f7a4b;cursor:default}
+.mission-action.full{flex-basis:100%}
+
+/* ---------- Screens (Skills / Missions / This Week / Progress) ---------- */
+.screen{display:none;background:linear-gradient(170deg,#eff7eb,#fffef7);padding:25px;min-height:560px}
+.screen.active{display:block}
+.screen-header{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:18px}
+.screen-header h2{font-size:28px;letter-spacing:-1px;margin:0 0 6px}
+.screen-header p{font-size:13px;color:#5d7268;margin:0}
+.dark-label{background:#182837;color:#ffda59;padding:10px 12px;border-radius:9px;font-size:10px;font-weight:900;white-space:nowrap}
+.skills-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.skill-card{border:2px solid #e2e9de;background:#fffefa;border-radius:18px;padding:19px;box-shadow:0 5px 0 #e3eadb}
+.skill-icon{width:52px;height:52px;border-radius:14px;background:#f5edca;display:grid;place-items:center;font-size:28px}
+.skill-card h3{font-size:17px;margin:12px 0 4px}
+.skill-card p{font-size:11px;color:#6d7b74;margin:0 0 14px;line-height:1.5}
+.skill-meta{display:flex;justify-content:space-between;font-size:11px;font-weight:900;margin:8px 0}
+.skill-track{height:10px;border-radius:12px;background:#e6ebe2;overflow:hidden}
+.skill-fill{height:100%;width:0;border-radius:12px;transition:width .5s}
+.skill-detail{margin-top:14px;font-size:11px;color:#55685c}
+.journal-list{display:flex;flex-direction:column;gap:9px}
+.journal-item{display:flex;align-items:center;gap:13px;padding:14px;background:#fffefa;border:2px solid #e4ebde;border-radius:13px}
+.journal-icon{font-size:24px;width:44px;height:44px;flex:none;border-radius:12px;background:#ffefc9;display:grid;place-items:center}
+.journal-item.verified .journal-icon{background:#e0f4df}
+.journal-copy{flex:1;min-width:0}
+.journal-copy strong{font-size:13px}
+.journal-copy p{font-size:11px;color:#68776f;margin:3px 0 0}
+.journal-actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.journal-filter,.filter-row{display:flex;gap:7px;margin-bottom:12px;flex-wrap:wrap;align-items:center}
+.filter-label{font-size:10px;font-weight:900;color:#6d7b74;letter-spacing:1px;text-transform:uppercase;min-width:62px}
+.mini-btn{padding:8px 11px;border:1.5px solid #dfe8db;border-radius:8px;background:#fffefa;color:#455a49;font-size:11px;font-weight:900;min-height:34px}
+.mini-btn:hover{background:#fff6da}
+.mini-btn.active{background:#ffca37;color:#3d3110;border-color:#ffca37}
+.mini-btn:disabled{opacity:.55;cursor:not-allowed}
+.empty{padding:20px;text-align:center;color:#66766e;font-size:12px;line-height:1.6;border:2px dashed #dce8da;border-radius:12px}
+
+/* Event cards */
+.source-note{font-size:11.5px;line-height:1.5;color:#45594f;background:#fff8e0;border:1.5px solid #f4dc95;border-radius:11px;padding:10px 12px;margin-bottom:14px}
+.source-note.live{background:#e9f6ee;border-color:#b9dfc6}
+.event-day{font-size:12px;font-weight:900;color:#3a4d44;letter-spacing:.6px;text-transform:uppercase;margin:16px 0 8px}
+.event-list{display:flex;flex-direction:column;gap:9px}
+.event-card{background:#fffefa;border:2px solid #e4ebde;border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:7px}
+.event-card.highlight{border-color:#ffb615;box-shadow:0 0 0 3px #ffe38a}
+.event-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.event-title{font-size:14px;font-weight:900;line-height:1.3;margin:0}
+.source-badge{font-size:9px;font-weight:900;border-radius:6px;padding:4px 7px;white-space:nowrap;letter-spacing:.5px}
+.source-badge.demo{background:#fff0cb;color:#7e5510}
+.source-badge.live{background:#dff3e6;color:#1d6b38}
+.event-meta{font-size:11px;color:#4f6158;font-weight:800;display:flex;flex-wrap:wrap;gap:4px 14px}
+.event-desc{font-size:11.5px;color:#5c6c64;line-height:1.5;margin:0}
+.event-buttons{display:flex;gap:6px;flex-wrap:wrap}
+.event-buttons a.mini-btn{text-decoration:none;display:inline-flex;align-items:center}
+.mini-event{border:1.5px solid #e8e9e0;background:#fffefa;border-radius:12px;padding:10px}
+.mini-event strong{font-size:12px;display:block}
+.mini-event .event-meta{font-size:10px;margin:4px 0 8px}
+
+/* Progress screen */
+.stat-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;margin-bottom:8px}
+.stat{background:#fffefa;border:2px solid #e2e9de;border-radius:14px;padding:13px;text-align:center}
+.stat b{display:block;font-size:22px;letter-spacing:-.5px}
+.stat span{font-size:10px;font-weight:900;color:#66766e;text-transform:uppercase;letter-spacing:.6px}
+.block-title{font-size:15px;margin:22px 0 10px}
+.skill-rows{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 18px}
+.skill-row{font-size:11px;font-weight:900}
+.skill-row .skill-meta{margin:0 0 5px}
+.reset-box{margin-top:24px;padding:15px;border:2px dashed #e4c7bf;border-radius:14px;background:#fff7f4;display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.reset-box p{font-size:11.5px;margin:0;color:#5c4a45;line-height:1.5;flex:1 1 260px}
+.danger-btn{background:#c94a3b;color:white;border:0;border-bottom:3px solid #8f2f24;border-radius:9px;padding:10px 14px;font-weight:900;font-size:12px}
+.danger-btn:hover{background:#b23e30}
+
+/* Toast */
+.toast{position:fixed;z-index:60;bottom:28px;left:50%;transform:translate(-50%,130px);background:#162536;color:white;padding:14px 18px;border:2px solid #ffca37;border-radius:15px;box-shadow:0 12px 40px #0018;display:flex;align-items:center;gap:12px;min-width:min(400px,90vw);font-size:13px;font-weight:900;opacity:0;pointer-events:none;transition:transform .3s,opacity .3s}
+.toast.show{transform:translate(-50%,0);opacity:1}
+.toast .toast-icon{font-size:26px}
+.toast small{font-size:11px;font-weight:700;color:#d1d5d9;display:block;margin-top:3px}
+
+/* ---------- Responsive layouts ---------- */
+@media(max-width:1400px){
+  .workspace{grid-template-columns:230px minmax(400px,1fr) 310px;gap:11px;padding:12px}
+  .nav-btn{padding:10px 10px;font-size:12px;gap:5px}
+  .logo{min-width:200px}
+  .stat-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:1150px){
+  .workspace{grid-template-columns:210px minmax(360px,1fr);grid-template-areas:"left center" "right right"}
+  .side-left{grid-area:left}.center{grid-area:center}.side-right{grid-area:right;position:static}
+  .side-right .panel{max-height:none}
+  .topbar{flex-wrap:wrap;padding:10px 15px;gap:10px}
+  .nav{order:3;flex-basis:100%;margin-left:0}
+  .logo-name{font-size:22px}
+}
+/* Phones: map first, filters below, building details become a bottom sheet */
+@media(max-width:760px){
+  .topbar{min-height:70px;padding:10px 12px;gap:8px}
+  .logo{min-width:auto;flex:1}
+  .tiger-logo{height:40px;width:40px;font-size:23px}
+  .player-info{min-width:96px}
+  .player-avatar{height:36px;width:36px;font-size:20px}
+  .nav{justify-content:space-between;gap:4px}
+  .nav-btn{flex:1;flex-direction:column;justify-content:center;padding:7px 2px;font-size:10px;gap:2px;min-height:48px}
+  .workspace{display:flex;flex-direction:column;padding:10px;gap:12px}
+  .side-left{order:2}.center{order:1}
+  .main-quest{padding:15px}
+  .category-list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}
+  .category-btn{gap:3px;flex-direction:column;text-align:center;font-size:10px;padding:7px 2px}
+  .category-count{display:none}
+  .tip-panel{display:none}
+  .world-heading{gap:8px;padding:10px 12px;flex-wrap:wrap}
+  .world-title{font-size:16px}
+  .world-sub{font-size:10px}
+  .map-controls .tag{display:none}
+  .control-btn{height:40px;width:40px}
+  .map-hint,.map-legend,.tutorial{display:none}
+  .details-fab{display:block;position:absolute;right:10px;bottom:10px;z-index:3;background:#162536;color:#ffe27a;border:2px solid #ffca37;border-radius:12px;padding:10px 12px;font-weight:900;font-size:12px}
+  .screen{padding:15px;min-height:420px}
+  .screen-header{flex-wrap:wrap;gap:8px}
+  .screen-header h2{font-size:22px}
+  .skills-grid,.skill-rows{grid-template-columns:1fr}
+  .stat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .journal-item{flex-wrap:wrap}
+  .journal-actions{width:100%;justify-content:flex-start}
+  .world-footer{font-size:10px;flex-wrap:wrap}
+  /* Bottom sheet */
+  .side-right{position:fixed;left:0;right:0;bottom:0;top:auto;z-index:40;transform:translateY(105%);transition:transform .28s ease;padding:0 6px}
+  .side-right.sheet-open{transform:translateY(0)}
+  .side-right .panel{max-height:72vh;border-radius:19px 19px 0 0;box-shadow:0 -10px 40px #0004}
+  .sheet-close{display:grid;place-items:center;position:sticky;top:8px;margin:8px 8px -48px auto;z-index:3;width:40px;height:40px;border-radius:50%;border:2px solid #fff;background:#162536;color:#fff;font-size:16px;font-weight:900}
+  .building-art{height:96px}
+}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+/* Hints fade away after the first move so they never hide building labels */
+.map-stage .tutorial,.map-stage .map-hint{transition:opacity .4s}
+.map-stage.explored .tutorial,.map-stage.explored .map-hint{opacity:0}
+
+/* =========================================================
+   GAME-STYLE VIEWPORT LAYOUT (tablet and desktop, 761px+)
+   The app fills exactly one screen height. The page itself does not scroll:
+   - the top bar keeps its natural height,
+   - the workspace grid takes the rest (flex: 1 + min-height: 0),
+   - each sidebar scrolls on its own (overflow-y: auto),
+   - the map fills the center and the SVG "meet" setting keeps its aspect ratio.
+   min-height: 0 matters: grid/flex children default to "as tall as my content",
+   which would stop them from shrinking and break the inner scrollbars.
+   ========================================================= */
+@media (min-width: 761px) {
+  .app { height: 100vh; height: 100dvh; min-height: 560px; }
+  .topbar { flex: none; }
+  .workspace {
+    flex: 1;
+    min-height: 0;
+    grid-template-rows: minmax(0, 1fr);
+    align-items: stretch;
+  }
+
+  /* Independently scrolling sidebars */
+  .side {
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    overscroll-behavior: contain;   /* scrolling a sidebar never scrolls anything else */
+    padding: 0 4px 10px 0;          /* room for card shadows and the scrollbar */
+    scrollbar-width: thin;
+  }
+  .side > * { flex-shrink: 0; }     /* cards keep their full height inside the scroller */
+  .side-right { position: static; }
+  .side-right .panel { max-height: none; overflow: visible; }
+
+  /* Center column: map always fills the available space */
+  .center { min-height: 0; }
+  .world-frame { flex: 1; min-height: 0; }
+  .world-heading, .world-footer { flex: none; }
+  .map-stage { flex: 1; min-height: 0; aspect-ratio: auto; }
+  .screen { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
+}
+
+/* Tablet / small laptop: map on the left, both sidebars stacked on the right,
+   each with its own scrollbar (instead of three cramped columns). */
+@media (min-width: 761px) and (max-width: 1150px) {
+  .workspace {
+    grid-template-columns: minmax(0, 1fr) 290px;
+    grid-template-rows: minmax(0, 2fr) minmax(0, 3fr);
+    grid-template-areas: "center left" "center right";
+  }
+  .side-left .tip-panel { display: none; }
+}

@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#101923" />
+  <meta name="description" content="TigerQuest — a playable prototype where Towson students explore a game-style campus map and discover real-world opportunities." />
+  <title>TigerQuest — Play Your College Journey</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%23131c2a'/%3E%3Ctext x='32' y='46' font-size='41' text-anchor='middle'%3E%F0%9F%90%AF%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="app">
+
+  <!-- ============ TOP BAR: logo, navigation, player level ============ -->
+  <header class="topbar">
+    <div class="logo"><div class="tiger-logo" aria-hidden="true">🐯</div><div><div class="logo-name">TIGER<span>QUEST</span></div><div class="logo-sub">PLAY YOUR COLLEGE JOURNEY</div></div></div>
+    <nav class="nav" aria-label="Main navigation">
+      <button class="nav-btn active" data-tab="map" aria-pressed="true"><span class="ico" aria-hidden="true">🗺️</span> Map</button>
+      <button class="nav-btn" data-tab="skills" aria-pressed="false"><span class="ico" aria-hidden="true">🌳</span> Skills</button>
+      <button class="nav-btn" data-tab="journal" aria-pressed="false"><span class="ico" aria-hidden="true">📜</span> Missions</button>
+      <button class="nav-btn" data-tab="week" aria-pressed="false"><span class="ico" aria-hidden="true">📅</span> This Week</button>
+      <button class="nav-btn" data-tab="progress" aria-pressed="false"><span class="ico" aria-hidden="true">🏆</span> Progress</button>
+    </nav>
+    <div class="player-pill">
+      <div class="player-info"><div class="lvl-line"><span id="levelLabel">LEVEL 1</span><small id="xpLabel">0 / 350 XP</small></div><div class="xp-track" role="progressbar" aria-label="XP toward next level" aria-valuemin="0" aria-valuemax="100" id="xpTrack"><div class="xp-bar" id="xpBar"></div></div></div>
+      <div class="player-avatar" title="Player avatar" aria-hidden="true">🧑‍🎓</div>
+    </div>
+  </header>
+
+  <div class="workspace">
+
+    <!-- ============ LEFT SIDEBAR: main quest, search, category filters ============ -->
+    <aside class="side side-left">
+      <section class="main-quest">
+        <div class="quest-eyebrow">🏁 MAIN STORY QUEST</div>
+        <h2>Beat the<br>College Game.</h2>
+        <p>Play the game digitally. Complete the missions in real life.</p>
+        <div class="progress-row"><div class="progress-track"><div class="progress-fill" id="storyBar"></div></div><div class="progress-num" id="storyCount">0 / 0</div></div>
+        <div class="quest-xp" id="totalXpLabel">0 XP earned</div>
+      </section>
+      <section class="panel"><div class="panel-pad">
+        <div class="section-heading">🔎 FIND YOUR NEXT QUEST <span id="buildingCount">11 spots</span></div>
+        <label class="search-field"><span aria-hidden="true">⌕</span><input id="searchBox" type="search" placeholder="Search places or missions..." autocomplete="off" aria-label="Search campus places and missions"/></label>
+        <div class="category-list" id="categoryList"></div>
+      </div></section>
+      <section class="tip-panel"><div class="tip-icon" aria-hidden="true">💡</div><div><strong>Real life = real progress</strong><p>The map helps you discover. Missions happen at real places. In this prototype, verification is simulated.</p></div></section>
+    </aside>
+
+    <!-- ============ CENTER: the game world (map) and the other screens ============ -->
+    <main class="center">
+      <section class="world-frame" aria-label="TigerQuest game world">
+        <div class="world-heading">
+          <div><h1 class="world-title" id="viewTitle">Welcome to Tiger Territory! 👋</h1><div class="world-sub" id="viewSubtitle">Select a building to discover real opportunities around campus.</div></div>
+          <div class="map-controls" id="mapControls">
+            <span class="tag demo">DEMO MODE</span>
+            <button class="control-btn" id="zoomInBtn" title="Zoom in" aria-label="Zoom in">＋</button>
+            <button class="control-btn" id="zoomOutBtn" title="Zoom out" aria-label="Zoom out">－</button>
+            <button class="control-btn" id="resetViewBtn" title="Reset view and return avatar to start" aria-label="Reset view and return avatar to start">⌖</button>
+          </div>
+        </div>
+
+        <div class="map-stage" id="mapStage">
+          <div class="tutorial" aria-hidden="true">🎮 <span>CLICK A BUILDING</span> TO EXPLORE</div>
+          <!-- The SVG uses the image's own pixel size (1511 x 1041) as its coordinate system.
+               Because hotspots, waypoints and the player all live inside this SVG,
+               they scale together with the picture at any screen size. -->
+          <svg id="campusMap" class="map-svg" viewBox="0 0 1511 1041" preserveAspectRatio="xMidYMid meet" role="group" aria-label="Interactive illustrated map of Towson University campus">
+            <image href="assets/towson-campus-map.png" x="0" y="0" width="1511" height="1041" />
+            <g id="hotspots"></g>
+            <g id="eventBadges"></g>
+            <g id="debugLayer"></g>
+            <g id="playerSprite" aria-hidden="true">
+              <g id="playerBody">
+                <ellipse cx="0" cy="10" rx="18" ry="8" fill="#2f5a22" opacity=".45"/>
+                <path d="M-12 -1 L-13 17 L-5 20 L0 6 L6 20 L15 17 L12 -1" fill="#253d6b" stroke="#1d314f" stroke-width="2"/>
+                <rect x="-13" y="-23" width="26" height="27" rx="7" fill="#f7c63a" stroke="#513e1f" stroke-width="2"/>
+                <circle cx="0" cy="-30" r="13" fill="#dfaa7b" stroke="#6d462e" stroke-width="2"/>
+                <path d="M-13 -33Q-8 -47 2 -43Q13 -43 14 -31Z" fill="#28261f"/>
+                <circle cx="-5" cy="-29" r="1.7" fill="#24292d"/><circle cx="6" cy="-29" r="1.7" fill="#24292d"/>
+                <rect x="-11" y="-16" width="22" height="6" rx="2" fill="#ec983b"/>
+                <text x="0" y="-7" text-anchor="middle" font-size="11" font-weight="900" fill="#263442">TU</text>
+                <path d="M0 -64L8 -50L-8 -50Z" fill="#ffc837" stroke="white" stroke-width="2"/>
+              </g>
+            </g>
+          </svg>
+          <div class="map-hint"><span aria-hidden="true">🕹️</span> Move with <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> or arrow keys</div>
+          <div class="map-legend"><span>📅 Events this week</span><span>🚧 Construction</span></div>
+          <button class="details-fab" id="detailsFab" type="button">📋 Building details</button>
+        </div>
+
+        <section id="skillsScreen" class="screen" aria-label="Skill trees">
+          <div class="screen-header"><div><h2>🌳 Your Skill Trees</h2><p>Level up by accomplishing things in the real world.</p></div><span class="dark-label">THE ROAD TO GRADUATION</span></div>
+          <div class="skills-grid" id="skillsGrid"></div>
+        </section>
+
+        <section id="journalScreen" class="screen" aria-label="Mission log">
+          <div class="screen-header"><div><h2>📜 Mission Journal</h2><p>Every quest is a real action you can take on campus.</p></div><span class="dark-label" id="missionJournalCount">0 VERIFIED</span></div>
+          <div class="journal-filter" id="journalFilter">
+            <button class="mini-btn active" data-journal="all">All missions</button>
+            <button class="mini-btn" data-journal="available">Available</button>
+            <button class="mini-btn" data-journal="planned">📌 Planned</button>
+            <button class="mini-btn" data-journal="self-reported">✋ Self-reported</button>
+            <button class="mini-btn" data-journal="verified">✅ Verified</button>
+          </div>
+          <div class="journal-list" id="journalList"></div>
+        </section>
+
+        <section id="weekScreen" class="screen" aria-label="Happening this week">
+          <div class="screen-header"><div><h2>📅 Happening This Week</h2><p id="weekRange">This week at Towson</p></div><span class="dark-label" id="eventSourceLabel">LOADING…</span></div>
+          <div class="source-note" id="eventSourceNote"></div>
+          <div class="filter-row" role="group" aria-label="Event source">
+            <span class="filter-label">Source</span>
+            <button class="mini-btn" data-source="live" id="liveSourceBtn">🌐 Live TU calendar</button>
+            <button class="mini-btn" data-source="demo">🧪 Sample events</button>
+          </div>
+          <div class="filter-row" id="eventCategoryFilter" role="group" aria-label="Filter events by category"></div>
+          <div class="filter-row" id="eventDayFilter" role="group" aria-label="Filter events by day"></div>
+          <div class="event-list" id="eventList"></div>
+        </section>
+
+        <section id="progressScreen" class="screen" aria-label="Player progress">
+          <div class="screen-header"><div><h2>🏆 Player Progress</h2><p>Your level, skills and planned quests.</p></div><span class="dark-label">SAVED IN THIS BROWSER</span></div>
+          <div class="stat-grid" id="statGrid"></div>
+          <h3 class="block-title">🌳 Skill progress</h3>
+          <div class="skill-rows" id="skillRows"></div>
+          <h3 class="block-title">⭐ My Quests — saved events</h3>
+          <div class="journal-list" id="savedEventList"></div>
+          <h3 class="block-title">📌 My Quests — planned missions</h3>
+          <div class="journal-list" id="plannedMissionList"></div>
+          <div class="reset-box">
+            <p>💾 Progress is stored with <code>localStorage</code> in <strong>this browser only</strong>. It does not sync between devices or browsers, and clearing site data erases it.</p>
+            <button class="danger-btn" id="resetProgressBtn">🔄 Reset all progress</button>
+          </div>
+        </section>
+
+        <footer class="world-footer"><div>🐯 <strong>TIGERQUEST · PROTOTYPE</strong> <span>— A game for real-world growth.</span></div><div><a class="footer-link" href="https://www.towson.edu/maps/" target="_blank" rel="noopener noreferrer">View official TU map ↗</a></div></footer>
+      </section>
+    </main>
+
+    <!-- ============ RIGHT SIDEBAR: selected building details ============ -->
+    <aside class="side side-right" id="detailSheet">
+      <section class="panel" id="detailPanel" aria-live="polite">
+        <button class="sheet-close" id="sheetCloseBtn" type="button" aria-label="Close building details">✕</button>
+        <div class="building-art" id="detailArt"><span class="art-label">📍 LOCATION UNLOCKED</span><span class="art-icon" id="detailIcon" aria-hidden="true">🏛️</span></div>
+        <div class="detail-top"><div class="small-title" id="detailCode">CAMPUS LOCATION</div><h2 id="detailName">University Union</h2><p id="detailDesc"></p><div class="chips" id="detailCategories"></div></div>
+        <div class="detail-section"><div class="section-heading">✨ WHAT'S HERE</div><div class="services" id="detailServices"></div></div>
+        <div class="detail-section"><div class="section-heading">📅 HAPPENING HERE THIS WEEK <span id="detailEventCount"></span></div><div class="mission-items" id="detailEvents"></div></div>
+        <div class="detail-section"><div class="section-heading">🎯 MISSIONS <span id="detailMissionCount">0 / 0</span></div><div class="mission-items" id="detailMissions"></div></div>
+        <div class="resource"><span>Information from Towson resources</span><a id="officialLink" target="_blank" rel="noopener noreferrer" href="https://www.towson.edu/">Official site ↗</a></div>
+      </section>
+    </aside>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"><span class="toast-icon" id="toastIcon">🏆</span><div><div id="toastTitle">Quest complete!</div><small id="toastSub">XP added to your profile</small></div></div>
+
+<!-- Plain script (no modules) so the app works when index.html is opened by double-click (file://). -->
+<script src="script.js"></script>
+</body>
+</html>
