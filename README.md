@@ -147,12 +147,10 @@ Our team defined the problem, product concept, requirements, user experience dec
 
 ## 👥 Team
 
-| Name | Role / contributions |
-|---|---|
-| *[Team member 1 — add name]* | *[add contributions]* |
-| *[Team member 2 — add name]* | *[add contributions]* |
-| *[Team member 3 — add name]* | *[add contributions]* |
-| *[Team member 4 — add name]* | *[add contributions]* |
+Brian Addo
+Adanna Enyaosa 
+Jephthe Fabre
+Franklin Bolanos
 
 ---
 
