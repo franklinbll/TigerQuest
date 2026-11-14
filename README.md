@@ -190,4 +190,4 @@ TigerQuest/
 - TigerQuest is a student project and is **not affiliated with or endorsed by Towson University**. "Towson University" and building names are used only to describe real campus locations.
 - Live event information belongs to its publishers on `events.towson.edu`. It is fetched at runtime and is not stored in this repository.
 - Icons are standard Unicode emoji drawn by the viewer's operating system. No icon files are included.
-- The campus map illustration (`assets/towson-campus-map.png`) was created by the team with an **AI image generator**. The file's embedded content credentials (C2PA) identify **ChatGPT / OpenAI image generation**, created Nov 14, 2026. *[Team: confirm, and review OpenAI's terms for publishing generated images.]*
+- The campus map illustration (`assets/towson-campus-map.png`) was created by the team with an **AI image generator**. The file's embedded content credentials (C2PA) identify **ChatGPT / OpenAI image generation**, created Nov 14, 2026. 
