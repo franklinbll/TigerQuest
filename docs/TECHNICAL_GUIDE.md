@@ -435,44 +435,7 @@ A mission is either verified or not, so it can only count once. `handleMissionAc
 
 ---
 
-## 11. Development process & AI assistance
-
-### What AI tools did
-AI coding assistants (including Claude by Anthropic) were used extensively to:
-- **Translate requirements into code:** the team wrote detailed requirement documents (features, constraints, priorities), and the AI implemented them in HTML, CSS and JavaScript.
-- **Implement the interface:** layouts, styling, panels, responsive design.
-- **Implement the algorithms:** the waypoint graph, Dijkstra pathfinding, collision checks.
-- **Research:** checking which Towson event sources are publicly accessible and allow browser requests (CORS).
-- **Debug and test:** finding layout bugs (e.g. the mobile panel opening in the wrong place) and verifying routes, XP, storage and offline behavior with automated browser checks.
-- **Write documentation**, including this guide.
-
-### What the team did (human decisions)
-- Identified the **problem** and the **product concept** ("play digitally, complete in real life").
-- Set the **requirements and constraints** (no frameworks, no backend, double-click to run, accessibility, honesty about sample data).
-- Made **UX decisions** (game aesthetic, map-centered layout, which buildings to include, and the map's geography, revised over several iterations; the illustration itself was AI-generated with ChatGPT image generation).
-- **Prioritized** features and reviewed and tested the results.
-- *[Team: add specific individual contributions here. Do not list anything that didn't happen.]*
-
-### Honest answer for judges
-> "We used AI-assisted development extensively. Our team came up with the problem, the product idea, the requirements and the design decisions. We wrote detailed specifications, and an AI coding assistant wrote most of the actual code from them, including the pathfinding and the event integration. Our job was to direct it, test it, catch problems and make the product calls. We also made sure we understand how every part works, which is why we can explain Dijkstra's algorithm or how the live calendar data is fetched. We're not claiming we hand-wrote code we didn't write."
-
-### Why understanding AI-generated code matters
-The team is responsible for what the code does, including bugs, privacy, licensing and claims made to users. Being able to explain the code is how you catch mistakes (for example, the AI's first version of the mobile panel opened at the top of the screen and had to be fixed), make safe changes, and answer judges honestly.
-
-### Before vs. during the hacking period
-*[Team must confirm against the official CODE/CLASH 2026 timeline.]* What we can state from file timestamps (Eastern Time, November 14, 2026):
-
-| Item | Evidence | Needs confirmation |
-|---|---|---|
-| First functional prototype (`index.html` with the original simplified map) | Last modified 12:55 PM on Nov 14 | When was it *started*? Was any work done before the official start time? |
-| New illustrated map (`Colorful Campus Map with Construction Cone.png`) | Embedded content credentials: generated with ChatGPT (OpenAI image generation) at 1:53 PM on Nov 14 | Who prompted it, and how many revisions? |
-| Upgrade (new map, pathfinding, events, missions, storage), layout fix, documentation | AI-assisted session on Nov 14, starting about 2:15 PM. Code changes finished about 3:00 PM; documentation and release preparation after 4:00 PM | Confirm this fits the official hacking period |
-
-Do not state dates or times to judges that you haven't confirmed.
-
----
-
-## 12. Limitations & future development
+## 11. Limitations & future development
 
 Full list: [PROJECT_LIMITATIONS.md](PROJECT_LIMITATIONS.md). The ones that matter most:
 
@@ -485,7 +448,7 @@ Full list: [PROJECT_LIMITATIONS.md](PROJECT_LIMITATIONS.md). The ones that matte
 
 ---
 
-## 13. Glossary
+## 12. Glossary
 
 | Term | Meaning | In TigerQuest |
 |---|---|---|
