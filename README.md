@@ -145,7 +145,6 @@ Our team defined the problem, product concept, requirements, user experience dec
 
 ---
 
-## 👥 Team
 
 ## 👥 Team
 
