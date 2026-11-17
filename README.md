@@ -71,7 +71,7 @@ No npm packages, no external libraries, no build tools.
 
 1. **Download** this repository (green **Code** button → **Download ZIP**, then extract it) or clone it:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/franklinbll/TigerQuest.git
    ```
 2. Open the `TigerQuest` folder.
 3. **Double-click `index.html`.**
